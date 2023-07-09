@@ -11,7 +11,7 @@ Fraction operator * (Fraction left, Fraction right);
 //#define ARIPHMETICAL_OPERATORS_CHECK
 //#define COMPARISONS_OPERATORS_CHECK
 //#define OPERATORS_PLUS_MINUS
-//#define INPUT_CHECK_1 
+#define INPUT_CHECK_1 
 
 class Fraction
 {
