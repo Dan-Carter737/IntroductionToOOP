@@ -1,6 +1,9 @@
 ﻿#include<iostream>
 using namespace std;
 
+
+//#define BEFORE_MOVE 
+
 class String
 {
 	int size;	//размер строки в Байтах
@@ -40,6 +43,22 @@ public:
 			this->str[i] = other.str[i];
 		cout << "Constructor:\t" << this << endl;
 	}
+	String(String&& other) noexcept   // Конструктор переноса 
+	{
+		str = nullptr;
+		size = 0;
+
+		str = other.str;
+		size = other.size;
+
+		other.str = nullptr;
+		other.size = 0;
+
+
+	}
+
+
+
 	~String()
 	{
 		delete[] str;
@@ -57,6 +76,23 @@ public:
 		cout << "CopyAssignment:\t" << this << endl;
 		return *this;
 	}
+	String& operator = (String&& other) // Оператор переноса 
+	{
+		if (this != &other)
+		{
+		}
+		delete[] str;
+		str = other.str;
+		size = other.size;
+		
+		other.str = nullptr;
+		other.size = 0;
+
+		cout << "MOVE_Assignment:\t" << this << endl;
+		return *this;
+	}
+
+
 	char operator[](int i) const
 	{
 		return str[i];
@@ -74,6 +110,8 @@ public:
 		cout << "Size:\t" << size << endl;
 		cout << "Str:\t" << str << endl;
 	}
+
+	
 };
 
 String operator +(const String& left, const String& right)
@@ -101,6 +139,8 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 void main()
 {
 	setlocale(LC_ALL, "");
+	
+#ifdef BEFORE_MOVE 
 	cout << sizeof("Hello") << endl;
 	String str(5);
 	str.print();
@@ -119,7 +159,16 @@ void main()
 	String str4;
 	str4 = str1 + str2;
 	cout << str4 << endl;
+#endif
 
+	String str6(1);
+	str6.print();
+
+	String str7(0);
+	str7.print();
+
+	str6 = move(str7);
+	cout << "str6 = " << str6 << "str7 = " << endl; 
 
 
 }
