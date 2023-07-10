@@ -2,7 +2,7 @@
 using namespace std;
 
 
-//#define BEFORE_MOVE 
+#define BEFORE_MOVE 
 
 class String
 {
@@ -45,9 +45,7 @@ public:
 	}
 	String(String&& other) noexcept   // Конструктор переноса 
 	{
-		str = nullptr;
-		size = 0;
-
+		
 		str = other.str;
 		size = other.size;
 
@@ -161,14 +159,10 @@ void main()
 	cout << str4 << endl;
 #endif
 
-	String str6(1);
-	str6.print();
+	String str6 = str1 + str2;
+	cout << "str6 = " << str6 << endl;
 
-	String str7(0);
-	str7.print();
-
-	str6 = move(str7);
-	cout << "str6 = " << str6 << "str7 = " << endl; 
+	
 
 
 }
