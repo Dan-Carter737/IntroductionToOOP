@@ -2,7 +2,7 @@
 using namespace std;
 
 
-#define BEFORE_MOVE 
+#define MOVE 
 
 class String
 {
@@ -22,32 +22,33 @@ public:
 		return str;
 	}
 	//				Constructors:
-	explicit String(int size = 80)
+	explicit String(int size = 80) : size(size), str(new char [size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "DefConstructor:\t" << this << endl;
 	}
-	String(const char* str)
+	String(const char* str): size(strlen(str) + 1), str(new char [size] {})
+	
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++) this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 	}
-	String(const String& other)
+	String(const String& other) : size(other.size), str(new char[size] {})
 	{
-		this->size = other.size;
-		this->str = new char[size] {};
+		//this->size = other.size;
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
-		cout << "Constructor:\t" << this << endl;
+		cout << "CopyConstructor:\t" << this << endl;
 	}
-	String(String&& other) noexcept   // Конструктор переноса 
+	String(String&& other) :size(other.size), str(other.str) // Конструктор переноса 
 	{
 		
-		str = other.str;
-		size = other.size;
+		//str = other.str;
+		//size = other.size;
 
 		other.str = nullptr;
 		other.size = 0;
@@ -138,7 +139,7 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	
-#ifdef BEFORE_MOVE 
+#ifdef MOVE
 	cout << sizeof("Hello") << endl;
 	String str(5);
 	str.print();
@@ -157,10 +158,12 @@ void main()
 	String str4;
 	str4 = str1 + str2;
 	cout << str4 << endl;
-#endif
 
 	String str6 = str1 + str2;
 	cout << "str6 = " << str6 << endl;
+
+#endif
+
 
 	
 
