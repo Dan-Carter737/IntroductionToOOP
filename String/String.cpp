@@ -1,4 +1,4 @@
-#include "String.h"
+#include "MyString.h"
 
 int String::get_size() const
 {
@@ -20,7 +20,6 @@ String::String(int size /* = 80 */) : size(size), str(new char [size] {}) //Пара
 	cout << "DefConstructor:\t" << this << endl;
 }
 String::String(const char* str) : String(strlen(str) + 1)
-
 {
 	for (int i = 0; str[i]; i++) this->str[i] = str[i];
 	cout << "Constructor:\t" << this << endl;
@@ -49,7 +48,7 @@ String::~String()
 	cout << "Destructor:\t" << this << endl;
 }
 
-String operator +(const String& left, const String& right);
+
 
 std::ostream& operator<<(std::ostream& os, const String& obj)
 {

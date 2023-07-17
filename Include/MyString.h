@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 using namespace std;
+
 class String
 {
 	int size;	//размер строки в Байтах
@@ -26,3 +27,5 @@ public:
 	//						Methods:
 	void print()const;
 };
+std::ostream& operator<<(std::ostream& os, const String& obj);
+String operator +(const String& left, const String& right);
